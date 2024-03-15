@@ -10,6 +10,6 @@ Za pokretanje frontend dela aplikacije- npm install
 
 Login:
 
-ROLE_ADMIN korisničko ime: miroslav lozinka: miroslav
+ROLE_ADMIN korisničko ime: miroslav, lozinka: miroslav
 
-ROLE_KORISNIK korisničko ime: petar lozinka: petar
+ROLE_KORISNIK korisničko ime: petar, lozinka: petar
