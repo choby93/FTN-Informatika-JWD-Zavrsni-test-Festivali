@@ -4,7 +4,7 @@ Tehnologije:
 
 Backend- SpringBoot
 
-Frontend- React
+Frontend- React JS
 
 Za pokretanje frontend dela aplikacije- npm install
 
