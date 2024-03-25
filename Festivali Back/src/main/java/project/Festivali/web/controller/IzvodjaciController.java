@@ -2,8 +2,11 @@ package project.Festivali.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +22,7 @@ import project.Festivali.support.IzvodjaciToIzvodjaciDto;
 import project.Festivali.web.dto.IzvodjacDto;
 
 @RestController
-@RequestMapping("/api/izvodjaci")
+@RequestMapping(value = "/api/izvodjaci", produces = MediaType.APPLICATION_JSON_VALUE)
 public class IzvodjaciController {
 
 	@Autowired
@@ -29,22 +32,18 @@ public class IzvodjaciController {
 	@Autowired
 	private IzvodjacDtoToIzvodjac toEntity;
 
-	@GetMapping
 	@PreAuthorize("permitAll()")
+	@GetMapping
 	public ResponseEntity<List<IzvodjacDto>> getAll() {
-
 		List<Izvodjac> izvodjaci = izvodjacService.getAll();
-
 		return new ResponseEntity<>(toDto.convert(izvodjaci), HttpStatus.OK);
 	}
 
-	@PostMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<IzvodjacDto> addIzvodjac(@RequestBody IzvodjacDto dto) {
-
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<IzvodjacDto> addIzvodjac(@Valid @RequestBody IzvodjacDto dto) {
 		Izvodjac izvodjac = toEntity.convert(dto);
 		Izvodjac novIzvodjac = izvodjacService.save(izvodjac);
-
 		return new ResponseEntity<>(toDto.convert(novIzvodjac), HttpStatus.OK);
 	}
 }
